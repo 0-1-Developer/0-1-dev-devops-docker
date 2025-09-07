@@ -381,6 +381,19 @@ Scripts are designed to be self-maintaining but may need updates when:
 - New validation requirements are added
 - Dependencies change
 
+## 📚 Related Resources
+
+### Internal Documentation
+- **[Docker Cheatsheet](../docs/DOCKER_CHEATSHEET.md)** - Complete command reference for all Docker operations
+- **[FAQ](../docs/FAQ.md)** - Common questions and troubleshooting guidance
+- **[Glossary](../docs/GLOSSARY.md)** - Docker terminology and concepts reference  
+- **[Platform Notes](../docs/platform-notes.md)** - OS-specific setup and troubleshooting
+
+### External Resources  
+- **[Docker Official Documentation](https://docs.docker.com/)**
+- **[CNCF Cloud Native Trail Map](https://github.com/cncf/trailmap)**
+- **[Docker Production Best Practices](https://docs.docker.com/develop/best-practices/)**
+
 ---
 
 💡 **Tip**: Use `make help` to see all available commands, including script shortcuts integrated into the main Makefile.

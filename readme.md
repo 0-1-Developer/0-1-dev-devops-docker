@@ -539,6 +539,7 @@ All contributions must follow our [authorship policy](./CLAUDE.md) and use the p
 
 | Resource | Purpose |
 |----------|---------|
+| 🐳 **[Docker Cheatsheet](./docs/DOCKER_CHEATSHEET.md)** | Complete command reference (basics to advanced) |
 | 📋 **[Quick Reference](./docs/GLOSSARY.md)** | Docker terminology and commands |
 | ❓ **[FAQ](./docs/FAQ.md)** | Common questions and solutions |
 | 🖥️ **[Platform Notes](./docs/platform-notes.md)** | OS-specific setup guidance |
