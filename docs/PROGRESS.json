@@ -111,16 +111,16 @@
     {
       "phase": "06",
       "name": "Compose",
-      "status": "pending",
+      "status": "implemented",
       "modules": [
         {
           "module": "01",
           "name": "Multi-Service Stacks",
           "lessons": [
-            {"lesson": "01", "anchor": "p06-m01-l01", "name": "Service Modeling", "status": "pending"},
-            {"lesson": "02", "anchor": "p06-m01-l02", "name": "Environment Profiles", "status": "pending"},
-            {"lesson": "03", "anchor": "p06-m01-l03", "name": "Dependencies & Health", "status": "pending"},
-            {"lesson": "04", "anchor": "p06-m01-l04", "name": "Secrets Management", "status": "pending"}
+            {"lesson": "01", "anchor": "p06-m01-l01", "name": "Service Modeling", "status": "implemented"},
+            {"lesson": "02", "anchor": "p06-m01-l02", "name": "Environment Profiles", "status": "implemented"},
+            {"lesson": "03", "anchor": "p06-m01-l03", "name": "Dependencies & Health", "status": "implemented"},
+            {"lesson": "04", "anchor": "p06-m01-l04", "name": "Secrets Management", "status": "implemented"}
           ]
         }
       ]

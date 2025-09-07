@@ -1629,7 +1629,6 @@ docker secret rm myapp_jwt_secret_v1
 - Use read-only filesystems and non-root users consistently
 - Monitor for security violations and unauthorized access attempts
 - Regular security audits and vulnerability scanning
-
 ## 🏁 Success Criteria
 
 By the end of this phase, you should be able to:
