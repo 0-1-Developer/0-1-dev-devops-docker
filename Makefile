@@ -1,247 +1,300 @@
 # Docker Learning Path - Makefile
-# Common operations for managing the curriculum
+# Provides common operations and utilities for the Docker learning path
 
-.PHONY: help clean verify progress setup check-docker
+.PHONY: help setup verify clean status progress test-phase build-images lint
+.DEFAULT_GOAL := help
 
-# Default target
-help:
-	@echo "Docker Learning Path - Available Commands:"
-	@echo ""
-	@echo "  make setup         - Initial setup and dependency check"
-	@echo "  make check-docker  - Verify Docker installation"
-	@echo "  make progress      - Show learning progress"
-	@echo "  make clean         - Clean up Docker resources"
-	@echo "  make verify        - Run verification tests"
-	@echo "  make phase-XX      - Jump to specific phase (00-11)"
-	@echo ""
-	@echo "Examples:"
-	@echo "  make phase-00      - Start with foundations"
-	@echo "  make progress      - Check your progress"
-	@echo "  make clean         - Clean up all containers/images"
+# Colors for output
+BLUE := \033[36m
+GREEN := \033[32m
+YELLOW := \033[33m
+RED := \033[31m
+RESET := \033[0m
 
-# Initial setup
-setup: check-docker
-	@echo "✅ Docker is installed and running"
-	@echo "📚 Repository structure is ready"
-	@echo "🚀 You can start with: make phase-00"
+help: ## Show this help message
+	@echo "$(BLUE)Docker Learning Path - Available Commands$(RESET)"
+	@echo "=========================================="
+	@awk 'BEGIN {FS = ":.*##"} /^[a-zA-Z_-]+:.*?##/ { printf "$(GREEN)%-20s$(RESET) %s\n", $$1, $$2 }' $(MAKEFILE_LIST)
 
-# Check Docker installation
-check-docker:
-	@echo "Checking Docker installation..."
-	@docker --version > /dev/null 2>&1 || (echo "❌ Docker is not installed" && exit 1)
-	@docker ps > /dev/null 2>&1 || (echo "❌ Docker daemon is not running" && exit 1)
-	@echo "✅ Docker is installed and running"
-	@docker --version
+setup: ## Initial setup for new learners
+	@echo "$(BLUE)Setting up Docker Learning Path environment...$(RESET)"
+	@docker --version || (echo "$(RED)Docker not installed. Please install Docker first.$(RESET)" && exit 1)
+	@docker compose version || (echo "$(RED)Docker Compose not available. Please install Docker Compose.$(RESET)" && exit 1)
+	@echo "$(GREEN)✅ Docker environment verified$(RESET)"
+	@echo "$(GREEN)✅ Ready to start learning! Begin with: make progress$(RESET)"
 
-# Show progress
-progress:
-	@echo "📊 Learning Progress:"
-	@echo ""
-	@if [ -f docs/PROGRESS.json ]; then \
-		completed=$$(grep -c '"status": "completed"' docs/PROGRESS.json); \
-		total=$$(grep -c '"status":' docs/PROGRESS.json); \
-		percent=$$(( $$completed * 100 / $$total )); \
-		echo "  Completed: $$completed/$$total lessons ($$percent%)"; \
-		echo ""; \
-		echo "Phase Status:"; \
-		for i in 00 01 02 03 04 05 06 07 08 09 10 11; do \
-			if [ -d "$$i-"* ]; then \
-				phase_name=$$(ls -d $$i-* | head -1); \
-				phase_complete=$$(grep -A5 "\"phase\": \"$$i\"" docs/PROGRESS.json | grep -c '"status": "completed"' || echo 0); \
-				phase_total=$$(grep -A5 "\"phase\": \"$$i\"" docs/PROGRESS.json | grep -c '"status":' || echo 0); \
-				if [ $$phase_total -gt 0 ]; then \
-					if [ $$phase_complete -eq $$phase_total ]; then \
-						echo "  ✅ Phase $$i - $$phase_name"; \
-					elif [ $$phase_complete -gt 0 ]; then \
-						echo "  🔄 Phase $$i - $$phase_name ($$phase_complete/$$phase_total)"; \
-					else \
-						echo "  ⭕ Phase $$i - $$phase_name"; \
-					fi \
-				fi \
-			fi \
-		done \
+verify: ## Run verification for all completed phases
+	@echo "$(BLUE)Running verification for completed phases...$(RESET)"
+	@./scripts/verify-progress.sh
+
+verify-phase: ## Run verification for specific phase (usage: make verify-phase PHASE=04)
+	@if [ -z "$(PHASE)" ]; then \
+		echo "$(RED)Usage: make verify-phase PHASE=04$(RESET)"; \
+		exit 1; \
+	fi
+	@echo "$(BLUE)Verifying Phase $(PHASE)...$(RESET)"
+	@if [ -f "./$(PHASE)-*/verify.rules.md" ]; then \
+		echo "Running Phase $(PHASE) verification..."; \
+		cd $(shell find . -name "$(PHASE)-*" -type d | head -1) && \
+		if [ -f "scripts/verify.sh" ]; then ./scripts/verify.sh; else echo "$(YELLOW)No verification script found$(RESET)"; fi; \
 	else \
-		echo "Progress file not found. Run 'make setup' first."; \
+		echo "$(RED)Phase $(PHASE) not found$(RESET)"; \
+		exit 1; \
 	fi
 
-# Clean up Docker resources
-clean:
-	@echo "🧹 Cleaning up Docker resources..."
-	@echo "This will remove:"
-	@echo "  - All stopped containers"
-	@echo "  - All dangling images"
-	@echo "  - All unused networks"
-	@echo ""
-	@read -p "Continue? [y/N] " confirm && [ "$$confirm" = "y" ] || exit 1
+clean: ## Clean up all Docker resources from exercises
+	@echo "$(YELLOW)⚠️  This will remove ALL Docker resources created during exercises$(RESET)"
+	@echo "$(YELLOW)Continue? [y/N]:$(RESET)"; \
+	read -r response; \
+	if [ "$$response" = "y" ] || [ "$$response" = "Y" ]; then \
+		echo "$(BLUE)Cleaning up Docker resources...$(RESET)"; \
+		docker container prune -f; \
+		docker image prune -a -f; \
+		docker volume prune -f; \
+		docker network prune -f; \
+		docker builder prune -a -f; \
+		echo "$(GREEN)✅ Docker cleanup complete$(RESET)"; \
+	else \
+		echo "$(GREEN)Cleanup cancelled$(RESET)"; \
+	fi
+
+clean-safe: ## Safe cleanup - only remove unused resources
+	@echo "$(BLUE)Running safe cleanup (unused resources only)...$(RESET)"
 	@docker container prune -f
 	@docker image prune -f
+	@docker volume prune -f
 	@docker network prune -f
-	@echo "✅ Cleanup complete"
+	@echo "$(GREEN)✅ Safe cleanup complete$(RESET)"
 
-# Deep clean (removes ALL Docker resources)
-clean-all:
-	@echo "⚠️  WARNING: This will remove ALL Docker resources!"
-	@echo "This includes:"
-	@echo "  - ALL containers (running and stopped)"
-	@echo "  - ALL images"
-	@echo "  - ALL volumes"
-	@echo "  - ALL networks"
+clean-phase: ## Clean up resources from specific phase (usage: make clean-phase PHASE=04)
+	@if [ -z "$(PHASE)" ]; then \
+		echo "$(RED)Usage: make clean-phase PHASE=04$(RESET)"; \
+		exit 1; \
+	fi
+	@echo "$(BLUE)Cleaning up Phase $(PHASE) resources...$(RESET)"
+	@if [ -f "./$(PHASE)-*/cleanup.rules.md" ]; then \
+		cd $(shell find . -name "$(PHASE)-*" -type d | head -1) && \
+		if [ -f "scripts/cleanup.sh" ]; then ./scripts/cleanup.sh; else echo "$(YELLOW)No cleanup script found, running manual cleanup$(RESET)"; fi; \
+	else \
+		echo "$(RED)Phase $(PHASE) not found$(RESET)"; \
+		exit 1; \
+	fi
+
+status: ## Show current Docker system status
+	@echo "$(BLUE)Docker System Status$(RESET)"
+	@echo "===================="
+	@echo "$(GREEN)Docker Version:$(RESET)"
+	@docker version --format "Client: {{.Client.Version}} | Server: {{.Server.Version}}"
 	@echo ""
-	@read -p "Are you SURE? Type 'yes' to confirm: " confirm && [ "$$confirm" = "yes" ] || exit 1
-	@docker system prune -a --volumes -f
-	@echo "✅ Deep cleanup complete"
-
-# Verify current phase
-verify:
-	@echo "Running verification tests..."
-	@if [ -f verify.sh ]; then \
-		bash verify.sh; \
-	else \
-		echo "No verification script found in current directory"; \
-	fi
-
-# Phase targets
-phase-00:
-	@echo "📚 Phase 00: Foundations"
-	@echo "Topics: Images vs Containers, Lifecycle, Resource Mapping"
-	@if [ -d "00-foundations" ]; then \
-		cd 00-foundations && ls -la; \
-	else \
-		echo "Phase directory not found. Creating..."; \
-		mkdir -p 00-foundations; \
-	fi
-
-phase-01:
-	@echo "📚 Phase 01: Dockerfile Basics"
-	@echo "Topics: Directives, Caching, Context Management"
-	@if [ -d "01-dockerfile-basics" ]; then \
-		cd 01-dockerfile-basics && ls -la; \
-	else \
-		echo "Phase directory not found. Creating..."; \
-		mkdir -p 01-dockerfile-basics; \
-	fi
-
-phase-02:
-	@echo "📚 Phase 02: BuildKit Advanced"
-	@echo "Topics: Multi-stage, Cache Mounts, Secrets"
-	@if [ -d "02-buildkit-advanced" ]; then \
-		cd 02-buildkit-advanced && ls -la; \
-	else \
-		echo "Phase directory not found. Creating..."; \
-		mkdir -p 02-buildkit-advanced; \
-	fi
-
-phase-03:
-	@echo "📚 Phase 03: Container Operations"
-	@echo "Topics: Health Checks, Restart Policies, Resource Limits"
-	@if [ -d "03-container-ops" ]; then \
-		cd 03-container-ops && ls -la; \
-	else \
-		echo "Phase directory not found. Creating..."; \
-		mkdir -p 03-container-ops; \
-	fi
-
-phase-04:
-	@echo "📚 Phase 04: Networking"
-	@echo "Topics: Network Types, Service Discovery, Isolation"
-	@if [ -d "04-networking" ]; then \
-		cd 04-networking && ls -la; \
-	else \
-		echo "Phase directory not found. Creating..."; \
-		mkdir -p 04-networking; \
-	fi
-
-phase-05:
-	@echo "📚 Phase 05: Storage & Volumes"
-	@echo "Topics: Volume Types, Backup/Restore, Permissions"
-	@if [ -d "05-storage-volumes" ]; then \
-		cd 05-storage-volumes && ls -la; \
-	else \
-		echo "Phase directory not found. Creating..."; \
-		mkdir -p 05-storage-volumes; \
-	fi
-
-phase-06:
-	@echo "📚 Phase 06: Compose"
-	@echo "Topics: Multi-container, Profiles, Dependencies"
-	@if [ -d "06-compose" ]; then \
-		cd 06-compose && ls -la; \
-	else \
-		echo "Phase directory not found. Creating..."; \
-		mkdir -p 06-compose; \
-	fi
-
-phase-07:
-	@echo "📚 Phase 07: Security"
-	@echo "Topics: Non-root, Capabilities, Scanning"
-	@if [ -d "07-security" ]; then \
-		cd 07-security && ls -la; \
-	else \
-		echo "Phase directory not found. Creating..."; \
-		mkdir -p 07-security; \
-	fi
-
-phase-08:
-	@echo "📚 Phase 08: CI/CD & Buildx"
-	@echo "Topics: Multi-arch, Cache, SBOM"
-	@if [ -d "08-ci-cd-buildx" ]; then \
-		cd 08-ci-cd-buildx && ls -la; \
-	else \
-		echo "Phase directory not found. Creating..."; \
-		mkdir -p 08-ci-cd-buildx; \
-	fi
-
-phase-09:
-	@echo "📚 Phase 09: Registries"
-	@echo "Topics: Local Registry, Mirroring, Auth"
-	@if [ -d "09-registries" ]; then \
-		cd 09-registries && ls -la; \
-	else \
-		echo "Phase directory not found. Creating..."; \
-		mkdir -p 09-registries; \
-	fi
-
-phase-10:
-	@echo "📚 Phase 10: Observability"
-	@echo "Topics: Logging, Metrics, Analysis"
-	@if [ -d "10-observability" ]; then \
-		cd 10-observability && ls -la; \
-	else \
-		echo "Phase directory not found. Creating..."; \
-		mkdir -p 10-observability; \
-	fi
-
-phase-11:
-	@echo "📚 Phase 11: Advanced Images"
-	@echo "Topics: Distroless, Static Linking, Debug"
-	@if [ -d "11-advanced-images" ]; then \
-		cd 11-advanced-images && ls -la; \
-	else \
-		echo "Phase directory not found. Creating..."; \
-		mkdir -p 11-advanced-images; \
-	fi
-
-# Quick status check
-status: progress
-
-# Update progress for a specific lesson
-mark-complete:
-	@echo "To mark a lesson complete, edit docs/PROGRESS.json"
-	@echo "Change the lesson status from 'pending' to 'completed'"
-
-# List all phases
-list-phases:
-	@echo "Available Phases:"
+	@echo "$(GREEN)System Information:$(RESET)"
+	@docker system df
 	@echo ""
-	@echo "  00 - Foundations"
-	@echo "  01 - Dockerfile Basics"
-	@echo "  02 - BuildKit Advanced"
-	@echo "  03 - Container Operations"
-	@echo "  04 - Networking"
-	@echo "  05 - Storage & Volumes"
-	@echo "  06 - Compose"
-	@echo "  07 - Security"
-	@echo "  08 - CI/CD & Buildx"
-	@echo "  09 - Registries"
-	@echo "  10 - Observability"
-	@echo "  11 - Advanced Images"
+	@echo "$(GREEN)Running Containers:$(RESET)"
+	@docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
+	@echo ""
+	@echo "$(GREEN)Recent Images:$(RESET)"
+	@docker images --format "table {{.Repository}}:{{.Tag}}\t{{.Size}}\t{{.CreatedSince}}" | head -6
+
+progress: ## Show learning progress and next steps
+	@echo "$(BLUE)Docker Learning Path Progress$(RESET)"
+	@echo "==============================="
+	@if [ -f "docs/PROGRESS.json" ]; then \
+		./scripts/progress-summary.sh; \
+	else \
+		echo "$(YELLOW)Progress tracking not initialized$(RESET)"; \
+	fi
+
+next: ## Show next recommended learning step
+	@echo "$(BLUE)Next Learning Step$(RESET)"
+	@echo "=================="
+	@./scripts/next-step.sh
+
+test-phase: ## Run tests for specific phase (usage: make test-phase PHASE=04)
+	@if [ -z "$(PHASE)" ]; then \
+		echo "$(RED)Usage: make test-phase PHASE=04$(RESET)"; \
+		exit 1; \
+	fi
+	@echo "$(BLUE)Testing Phase $(PHASE) exercises...$(RESET)"
+	@if [ -f "./$(PHASE)-*/lab.md" ]; then \
+		cd $(shell find . -name "$(PHASE)-*" -type d | head -1) && \
+		echo "Running Phase $(PHASE) tests..." && \
+		if [ -f "scripts/test.sh" ]; then ./scripts/test.sh; else echo "$(YELLOW)No test script found$(RESET)"; fi; \
+	else \
+		echo "$(RED)Phase $(PHASE) not found$(RESET)"; \
+		exit 1; \
+	fi
+
+build-images: ## Pre-build common images for faster exercises
+	@echo "$(BLUE)Pre-building common images for faster exercises...$(RESET)"
+	@echo "Pulling frequently used base images..."
+	@docker pull ubuntu:20.04
+	@docker pull alpine:latest
+	@docker pull nginx:latest
+	@docker pull node:18-alpine
+	@docker pull python:3.11-slim
+	@docker pull golang:1.21-alpine
+	@echo "$(GREEN)✅ Common images cached$(RESET)"
+
+lint: ## Check all Markdown files for common issues
+	@echo "$(BLUE)Linting learning path content...$(RESET)"
+	@./scripts/lint-content.sh
+
+check-links: ## Verify all internal links work correctly
+	@echo "$(BLUE)Checking internal links...$(RESET)"
+	@./scripts/check-links.sh
+
+quick-start: ## Quick start guide for new learners
+	@echo "$(BLUE)Docker Learning Path - Quick Start$(RESET)"
+	@echo "=================================="
+	@echo ""
+	@echo "$(GREEN)1. Verify your setup:$(RESET)"
+	@echo "   make setup"
+	@echo ""
+	@echo "$(GREEN)2. Check your progress:$(RESET)"
+	@echo "   make progress"
+	@echo ""
+	@echo "$(GREEN)3. Start with Phase 00:$(RESET)"
+	@echo "   cd 00-foundations && cat README.md"
+	@echo ""
+	@echo "$(GREEN)4. After each phase:$(RESET)"
+	@echo "   make verify-phase PHASE=00"
+	@echo "   make clean-phase PHASE=00"
+	@echo ""
+	@echo "$(GREEN)5. Track progress:$(RESET)"
+	@echo "   make next"
+	@echo ""
+	@echo "$(GREEN)6. Get help:$(RESET)"
+	@echo "   cat docs/FAQ.md"
+	@echo ""
+	@echo "$(BLUE)Happy learning! 🐳$(RESET)"
+
+# Advanced maintenance commands
+update-progress: ## Update progress tracking from completed anchors
+	@echo "$(BLUE)Updating progress tracking...$(RESET)"
+	@./scripts/update-progress.sh
+
+generate-report: ## Generate learning progress report
+	@echo "$(BLUE)Generating progress report...$(RESET)"
+	@./scripts/generate-report.sh > learning-report.md
+	@echo "$(GREEN)✅ Report saved to learning-report.md$(RESET)"
+
+backup-progress: ## Backup current progress and configurations
+	@echo "$(BLUE)Backing up learning progress...$(RESET)"
+	@mkdir -p backups
+	@cp docs/PROGRESS.json backups/progress-$(shell date +%Y%m%d-%H%M%S).json
+	@echo "$(GREEN)✅ Progress backed up to backups/$(RESET)"
+
+# Development and maintenance commands
+dev-setup: ## Setup development environment for contributors
+	@echo "$(BLUE)Setting up development environment...$(RESET)"
+	@npm install -g markdownlint-cli
+	@pip install pre-commit
+	@pre-commit install
+	@echo "$(GREEN)✅ Development tools installed$(RESET)"
+
+validate-structure: ## Validate repository structure against requirements
+	@echo "$(BLUE)Validating repository structure...$(RESET)"
+	@./scripts/validate-structure.sh
+
+# Platform-specific helpers
+windows-setup: ## Windows/WSL2-specific setup instructions
+	@echo "$(BLUE)Windows/WSL2 Setup Instructions$(RESET)"
+	@echo "================================"
+	@echo ""
+	@echo "$(GREEN)1. Enable WSL2:$(RESET)"
+	@echo "   dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart"
+	@echo "   dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart"
+	@echo ""
+	@echo "$(GREEN)2. Install Ubuntu:$(RESET)"
+	@echo "   wsl --install -d Ubuntu"
+	@echo ""
+	@echo "$(GREEN)3. Configure Docker Desktop:$(RESET)"
+	@echo "   Enable WSL2 integration in Docker Desktop settings"
+	@echo ""
+	@echo "$(GREEN)4. Set line endings:$(RESET)"
+	@echo "   git config --global core.autocrlf input"
+	@echo ""
+	@echo "$(GREEN)5. Continue with:$(RESET)"
+	@echo "   make setup"
+
+macos-setup: ## macOS-specific setup instructions
+	@echo "$(BLUE)macOS Setup Instructions$(RESET)"
+	@echo "========================="
+	@echo ""
+	@echo "$(GREEN)1. Install Docker Desktop for Mac$(RESET)"
+	@echo ""
+	@echo "$(GREEN)2. Allocate resources:$(RESET)"
+	@echo "   - Recommended: 4+ CPU cores, 8GB+ RAM"
+	@echo "   - Docker Desktop > Preferences > Resources"
+	@echo ""
+	@echo "$(GREEN)3. Enable file sharing:$(RESET)"
+	@echo "   - Add your project directory to file sharing"
+	@echo ""
+	@echo "$(GREEN)4. Continue with:$(RESET)"
+	@echo "   make setup"
+
+# Emergency commands
+emergency-reset: ## Emergency reset - remove all Docker data (DESTRUCTIVE)
+	@echo "$(RED)⚠️  EMERGENCY RESET - This will remove ALL Docker data!$(RESET)"
+	@echo "$(RED)This includes all containers, images, volumes, and networks$(RESET)"
+	@echo "$(YELLOW)Type 'CONFIRM' to proceed:$(RESET)"; \
+	read -r response; \
+	if [ "$$response" = "CONFIRM" ]; then \
+		echo "$(RED)Performing emergency reset...$(RESET)"; \
+		docker system prune -a -f --volumes; \
+		docker builder prune -a -f; \
+		echo "$(GREEN)✅ Emergency reset complete$(RESET)"; \
+	else \
+		echo "$(GREEN)Reset cancelled$(RESET)"; \
+	fi
+
+troubleshoot: ## Show troubleshooting information and common solutions
+	@echo "$(BLUE)Docker Learning Path Troubleshooting$(RESET)"
+	@echo "===================================="
+	@echo ""
+	@echo "$(GREEN)1. Check Docker status:$(RESET)"
+	@echo "   make status"
+	@echo ""
+	@echo "$(GREEN)2. Verify specific phase:$(RESET)"
+	@echo "   make verify-phase PHASE=XX"
+	@echo ""
+	@echo "$(GREEN)3. Clean up resources:$(RESET)"
+	@echo "   make clean-safe"
+	@echo ""
+	@echo "$(GREEN)4. Platform-specific help:$(RESET)"
+	@echo "   cat docs/platform-notes.md"
+	@echo ""
+	@echo "$(GREEN)5. Check FAQ:$(RESET)"
+	@echo "   cat docs/FAQ.md"
+	@echo ""
+	@echo "$(GREEN)6. Emergency reset (if needed):$(RESET)"
+	@echo "   make emergency-reset"
+
+# Information commands
+info: ## Show detailed information about the learning path
+	@echo "$(BLUE)Docker Learning Path Information$(RESET)"
+	@echo "================================="
+	@echo ""
+	@echo "$(GREEN)Repository Structure:$(RESET)"
+	@find . -type d -name "[0-9][0-9]-*" | sort | sed 's/^/  /'
+	@echo ""
+	@echo "$(GREEN)Documentation:$(RESET)"
+	@ls -la docs/ | grep -E "\.(md|json)$$" | awk '{print "  " $$9}' | sort
+	@echo ""
+	@echo "$(GREEN)Total Phases:$(RESET) $(shell find . -type d -name "[0-9][0-9]-*" | wc -l)"
+	@echo "$(GREEN)Learning Time:$(RESET) ~30-40 hours"
+	@echo "$(GREEN)Skill Level:$(RESET) Beginner to Advanced"
+
+version: ## Show version information
+	@echo "$(BLUE)Docker Learning Path Version$(RESET)"
+	@echo "============================"
+	@if [ -f "docs/PROGRESS.json" ]; then \
+		cat docs/PROGRESS.json | grep -E '"version"|"last_updated"' | sed 's/^/  /'; \
+	else \
+		echo "  Version: 1.0.0"; \
+		echo "  Status: Development"; \
+	fi
+	@echo ""
+	@echo "$(GREEN)Docker Environment:$(RESET)"
+	@docker --version | sed 's/^/  /'
+	@docker compose version | sed 's/^/  /'

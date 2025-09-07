@@ -1,0 +1,139 @@
+name: 🎨 Visual Request
+description: Request diagrams, illustrations, or visual learning aids
+title: "[Visual]: "
+labels: ["visual", "enhancement", "kind:visual"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Visual learning aids significantly improve comprehension! Help us identify where diagrams or illustrations would be most valuable.
+
+  - type: dropdown
+    id: phase
+    attributes:
+      label: Phase
+      description: Which phase needs visual enhancement?
+      options:
+        - "Phase 00: Foundations"
+        - "Phase 01: Dockerfile Basics"
+        - "Phase 02: BuildKit Advanced"
+        - "Phase 03: Container Operations"
+        - "Phase 04: Networking"
+        - "Phase 05: Storage & Volumes"
+        - "Phase 06: Compose"
+        - "Phase 07: Security"
+        - "Phase 08: CI/CD & Buildx"
+        - "Phase 09: Registries"
+        - "Phase 10: Observability"
+        - "Phase 11: Advanced Images"
+        - "Cross-phase/General"
+    validations:
+      required: true
+
+  - type: input
+    id: progress-anchor
+    attributes:
+      label: Progress Anchor
+      description: "Specific lesson if applicable (e.g., p04-m01-l02)"
+      placeholder: "p04-m01-l02"
+
+  - type: dropdown
+    id: visual-type
+    attributes:
+      label: Type of Visual
+      description: What kind of visual aid would be helpful?
+      options:
+        - "Architecture Diagram - System components and relationships"
+        - "Flow Chart - Process or workflow steps"
+        - "Network Diagram - Container networking concepts"
+        - "Layer Diagram - Docker image layers or file system"
+        - "Timeline - Sequential processes or lifecycle"
+        - "Comparison Chart - Before/after or option comparison"
+        - "Conceptual Illustration - Abstract concepts made visual"
+        - "Screenshot/UI - Tool interfaces or command outputs"
+        - "Other"
+    validations:
+      required: true
+
+  - type: textarea
+    id: concept-description
+    attributes:
+      label: Concept to Visualize
+      description: "Describe the concept that needs visual representation"
+      placeholder: |
+        **What concept needs visualization:**
+        - Which Docker concept is difficult to understand without visuals?
+        - What relationships or processes need to be shown?
+        - What's currently explained only in text?
+        
+        **Why a visual would help:**
+        - What makes this concept hard to grasp from text alone?
+        - How would a diagram improve understanding?
+    validations:
+      required: true
+
+  - type: textarea
+    id: visual-requirements
+    attributes:
+      label: Visual Requirements
+      description: "Specific requirements or suggestions for the visual"
+      placeholder: |
+        **Visual elements to include:**
+        - What components should be shown?
+        - What relationships need to be illustrated?
+        - Any specific style or format preferences?
+        
+        **Context:**
+        - Where should this visual be placed in the lesson?
+        - Should it replace existing text or supplement it?
+        - Any accessibility requirements?
+
+  - type: dropdown
+    id: complexity
+    attributes:
+      label: Complexity Level
+      description: How complex should the visual be?
+      options:
+        - "Simple - Basic concept illustration"
+        - "Medium - Multiple components with relationships"
+        - "Complex - Detailed system architecture"
+    validations:
+      required: true
+
+  - type: textarea
+    id: examples
+    attributes:
+      label: Reference Examples
+      description: "Links to similar visuals that illustrate the style or content you're thinking of"
+      placeholder: |
+        - Similar diagrams: https://...
+        - Style references: https://...
+        - Official Docker diagrams: https://docs.docker.com/...
+
+  - type: checkboxes
+    id: visual-format
+    attributes:
+      label: Preferred Formats
+      description: "Which formats would work best? (Select all that apply)"
+      options:
+        - label: "Mermaid diagram (code-based, version controllable)"
+        - label: "SVG illustration (scalable, web-friendly)"
+        - label: "PNG/JPG image (traditional format)"
+        - label: "Animated GIF (for sequential processes)"
+        - label: "Interactive diagram (if technically feasible)"
+
+  - type: checkboxes
+    id: contribution-interest
+    attributes:
+      label: Contribution
+      options:
+        - label: "I can help create this visual"
+        - label: "I can provide rough sketches or mockups"
+        - label: "I have design/illustration skills"
+        - label: "I can help with Mermaid diagram code"
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: "Any other details that would help create the perfect visual aid"

@@ -1,0 +1,123 @@
+name: 🐛 Bug Report
+description: Report an error in the learning materials or exercises
+title: "[Bug]: "
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reporting a bug! This helps improve the Docker learning path for everyone.
+
+  - type: dropdown
+    id: phase
+    attributes:
+      label: Phase
+      description: Which phase contains the bug?
+      options:
+        - "Phase 00: Foundations"
+        - "Phase 01: Dockerfile Basics"
+        - "Phase 02: BuildKit Advanced" 
+        - "Phase 03: Container Operations"
+        - "Phase 04: Networking"
+        - "Phase 05: Storage & Volumes"
+        - "Phase 06: Compose"
+        - "Phase 07: Security"
+        - "Phase 08: CI/CD & Buildx"
+        - "Phase 09: Registries"
+        - "Phase 10: Observability"
+        - "Phase 11: Advanced Images"
+        - "General/Documentation"
+    validations:
+      required: true
+
+  - type: input
+    id: progress-anchor
+    attributes:
+      label: Progress Anchor
+      description: "If applicable, provide the specific lesson anchor (e.g., p04-m01-l02)"
+      placeholder: "p04-m01-l02"
+
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platform
+      description: What platform are you using?
+      options:
+        - "Linux (Docker Engine)"
+        - "macOS (Docker Desktop)"
+        - "Windows (Docker Desktop with WSL2)"
+        - "Windows (Docker Desktop with Hyper-V)"
+        - "Cloud Instance (specify in description)"
+    validations:
+      required: true
+
+  - type: textarea
+    id: docker-version
+    attributes:
+      label: Docker Version Information
+      description: "Please run `docker version` and paste the output here"
+      placeholder: |
+        Client: Docker Engine - Community
+         Version:           20.10.21
+         API version:       1.41
+         ...
+      render: text
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: "Clear description of the bug and what you expected to happen"
+      placeholder: |
+        **What happened:**
+        Describe the bug clearly and concisely.
+        
+        **Expected behavior:**  
+        What should have happened instead?
+        
+        **Impact:**
+        How does this affect completing the exercise or learning?
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to Reproduce
+      description: "Detailed steps to reproduce the issue"
+      placeholder: |
+        1. Go to Phase X, Exercise Y
+        2. Run command: `docker run ...`
+        3. Expected result: ...
+        4. Actual result: ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: error-output
+    attributes:
+      label: Error Output
+      description: "If there are error messages, paste them here"
+      render: text
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: "Any other context, screenshots, or relevant information"
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: "I have searched existing issues to ensure this is not a duplicate"
+          required: true
+        - label: "I have included my Docker version information"
+          required: true
+        - label: "I have provided clear reproduction steps"
+          required: true
+        - label: "I have checked the platform-specific notes in /docs/platform-notes.md"
+          required: false
