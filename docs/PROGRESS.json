@@ -1,7 +1,7 @@
 {
   "metadata": {
     "version": "1.0.0",
-    "last_updated": "2025-01-07T14:30:00Z",
+    "last_updated": "2025-01-07T15:45:00Z",
     "total_phases": 12,
     "description": "Progress tracking for Docker learning path"
   },
@@ -26,16 +26,16 @@
     {
       "phase": "01",
       "name": "Dockerfile Basics",
-      "status": "pending",
+      "status": "implemented",
       "modules": [
         {
           "module": "01",
           "name": "Dockerfile Directives",
           "lessons": [
-            {"lesson": "01", "anchor": "p01-m01-l01", "name": "Directive Fundamentals", "status": "pending"},
-            {"lesson": "02", "anchor": "p01-m01-l02", "name": "Cache Strategies", "status": "pending"},
-            {"lesson": "03", "anchor": "p01-m01-l03", "name": "Context Management", "status": "pending"},
-            {"lesson": "04", "anchor": "p01-m01-l04", "name": "CMD vs ENTRYPOINT", "status": "pending"}
+            {"lesson": "01", "anchor": "p01-m01-l01", "name": "Directive→Purpose Flashcards", "status": "implemented"},
+            {"lesson": "02", "anchor": "p01-m01-l02", "name": "Cache-Bust Scenarios", "status": "implemented"},
+            {"lesson": "03", "anchor": "p01-m01-l03", "name": "Context Scoping Exercise", "status": "implemented"},
+            {"lesson": "04", "anchor": "p01-m01-l04", "name": "CMD vs ENTRYPOINT Decision Tree", "status": "implemented"}
           ]
         }
       ]
