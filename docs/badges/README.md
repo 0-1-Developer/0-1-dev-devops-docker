@@ -58,7 +58,7 @@ The Docker learning path uses a comprehensive badge system to motivate learners 
 ---
 
 ### Phase 03: Container Operations Badge
-![Phase 03 Badge](phase-03-container-ops.svg)
+![Phase 03 Badge](phase-03-container-operations.svg)
 
 **Earning Criteria:**
 - ✅ Complete all 4 micro-lessons (p03-m01-l01 through p03-m01-l04)
@@ -84,7 +84,7 @@ The Docker learning path uses a comprehensive badge system to motivate learners 
 ---
 
 ### Phase 05: Storage & Volumes Badge
-![Phase 05 Badge](phase-05-storage-volumes.svg)
+![Phase 05 Badge](phase-05-storage.svg)
 
 **Earning Criteria:**
 - ✅ Complete all 4 micro-lessons (p05-m01-l01 through p05-m01-l04)

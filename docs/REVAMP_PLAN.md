@@ -73,9 +73,9 @@
 /00-foundations/
 /01-dockerfile-basics/
 /02-buildkit-advanced/
-/03-container-ops/
+/03-container-operations/
 /04-networking/
-/05-storage-volumes/
+/05-storage/
 /06-compose/
 /07-security/
 /08-ci-cd-buildx/

@@ -79,9 +79,9 @@ For platform engineers and DevOps professionals
 | **00** | [Foundations](./00-foundations) | 4 | 3-4 hrs | ✅ Complete |
 | **01** | [Dockerfile Basics](./01-dockerfile-basics) | 4 | 3-4 hrs | ✅ Complete |
 | **02** | [BuildKit Advanced](./02-buildkit-advanced) | 4 | 4-5 hrs | ✅ Complete |
-| **03** | [Container Operations](./03-container-ops) | 4 | 3-4 hrs | ✅ Complete |
+| **03** | [Container Operations](./03-container-operations) | 4 | 3-4 hrs | ✅ Complete |
 | **04** | [Networking](./04-networking) | 4 | 4-5 hrs | ✅ Complete |
-| **05** | [Storage & Volumes](./05-storage-volumes) | 4 | 3-4 hrs | ✅ Complete |
+| **05** | [Storage & Volumes](./05-storage) | 4 | 3-4 hrs | ✅ Complete |
 | **06** | [Compose](./06-compose) | 4 | 4-5 hrs | ✅ Complete |
 | **07** | [Security](./07-security) | 4 | 4-5 hrs | ✅ Complete |
 | **08** | [CI/CD & Buildx](./08-ci-cd-buildx) | 4 | 4-5 hrs | ✅ Complete |

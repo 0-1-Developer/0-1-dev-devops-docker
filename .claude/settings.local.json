@@ -12,7 +12,9 @@
       "Bash(git merge:*)",
       "Bash(git ls-tree:*)",
       "Bash(git fetch:*)",
-      "Bash(gh pr create:*)"
+      "Bash(gh pr create:*)",
+      "Bash(./scripts/validate-structure.sh:*)",
+      "Bash(bash scripts/validate-structure.sh:*)"
     ],
     "deny": [],
     "ask": []

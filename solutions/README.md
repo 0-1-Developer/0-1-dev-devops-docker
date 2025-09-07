@@ -24,9 +24,9 @@ solutions/
 ├── phase-00-foundations/
 ├── phase-01-dockerfile-basics/
 ├── phase-02-buildkit-advanced/
-├── phase-03-container-ops/
+├── phase-03-container-operations/
 ├── phase-04-networking/
-├── phase-05-storage-volumes/
+├── phase-05-storage/
 ├── phase-06-compose/
 ├── phase-07-security/
 ├── phase-08-ci-cd-buildx/
