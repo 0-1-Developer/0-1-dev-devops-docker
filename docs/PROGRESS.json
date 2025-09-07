@@ -1,0 +1,221 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "last_updated": "2025-01-07T00:00:00Z",
+    "total_phases": 12,
+    "description": "Progress tracking for Docker learning path"
+  },
+  "phases": [
+    {
+      "phase": "00",
+      "name": "Foundations",
+      "status": "pending",
+      "modules": [
+        {
+          "module": "01",
+          "name": "Core Concepts",
+          "lessons": [
+            {"lesson": "01", "anchor": "p00-m01-l01", "name": "Image vs Container", "status": "pending"},
+            {"lesson": "02", "anchor": "p00-m01-l02", "name": "Container Lifecycle", "status": "pending"},
+            {"lesson": "03", "anchor": "p00-m01-l03", "name": "Resource Mapping", "status": "pending"},
+            {"lesson": "04", "anchor": "p00-m01-l04", "name": "Tags vs Digests", "status": "pending"}
+          ]
+        }
+      ]
+    },
+    {
+      "phase": "01",
+      "name": "Dockerfile Basics",
+      "status": "pending",
+      "modules": [
+        {
+          "module": "01",
+          "name": "Dockerfile Directives",
+          "lessons": [
+            {"lesson": "01", "anchor": "p01-m01-l01", "name": "Directive Fundamentals", "status": "pending"},
+            {"lesson": "02", "anchor": "p01-m01-l02", "name": "Cache Strategies", "status": "pending"},
+            {"lesson": "03", "anchor": "p01-m01-l03", "name": "Context Management", "status": "pending"},
+            {"lesson": "04", "anchor": "p01-m01-l04", "name": "CMD vs ENTRYPOINT", "status": "pending"}
+          ]
+        }
+      ]
+    },
+    {
+      "phase": "02",
+      "name": "BuildKit Advanced",
+      "status": "pending",
+      "modules": [
+        {
+          "module": "01",
+          "name": "Multi-stage Builds",
+          "lessons": [
+            {"lesson": "01", "anchor": "p02-m01-l01", "name": "Stage Design", "status": "pending"},
+            {"lesson": "02", "anchor": "p02-m01-l02", "name": "Secret Management", "status": "pending"},
+            {"lesson": "03", "anchor": "p02-m01-l03", "name": "Cache Mounts", "status": "pending"},
+            {"lesson": "04", "anchor": "p02-m01-l04", "name": "Build Args", "status": "pending"}
+          ]
+        }
+      ]
+    },
+    {
+      "phase": "03",
+      "name": "Container Operations",
+      "status": "pending",
+      "modules": [
+        {
+          "module": "01",
+          "name": "Runtime Management",
+          "lessons": [
+            {"lesson": "01", "anchor": "p03-m01-l01", "name": "Health Checks", "status": "pending"},
+            {"lesson": "02", "anchor": "p03-m01-l02", "name": "Restart Policies", "status": "pending"},
+            {"lesson": "03", "anchor": "p03-m01-l03", "name": "Resource Limits", "status": "pending"},
+            {"lesson": "04", "anchor": "p03-m01-l04", "name": "Signal Handling", "status": "pending"}
+          ]
+        }
+      ]
+    },
+    {
+      "phase": "04",
+      "name": "Networking",
+      "status": "pending",
+      "modules": [
+        {
+          "module": "01",
+          "name": "Network Design",
+          "lessons": [
+            {"lesson": "01", "anchor": "p04-m01-l01", "name": "Network Types", "status": "pending"},
+            {"lesson": "02", "anchor": "p04-m01-l02", "name": "Service Discovery", "status": "pending"},
+            {"lesson": "03", "anchor": "p04-m01-l03", "name": "Network Isolation", "status": "pending"},
+            {"lesson": "04", "anchor": "p04-m01-l04", "name": "Port Management", "status": "pending"}
+          ]
+        }
+      ]
+    },
+    {
+      "phase": "05",
+      "name": "Storage & Volumes",
+      "status": "pending",
+      "modules": [
+        {
+          "module": "01",
+          "name": "Data Management",
+          "lessons": [
+            {"lesson": "01", "anchor": "p05-m01-l01", "name": "Volume Types", "status": "pending"},
+            {"lesson": "02", "anchor": "p05-m01-l02", "name": "Backup & Restore", "status": "pending"},
+            {"lesson": "03", "anchor": "p05-m01-l03", "name": "Permission Handling", "status": "pending"},
+            {"lesson": "04", "anchor": "p05-m01-l04", "name": "Performance Optimization", "status": "pending"}
+          ]
+        }
+      ]
+    },
+    {
+      "phase": "06",
+      "name": "Compose",
+      "status": "pending",
+      "modules": [
+        {
+          "module": "01",
+          "name": "Multi-Service Stacks",
+          "lessons": [
+            {"lesson": "01", "anchor": "p06-m01-l01", "name": "Service Modeling", "status": "pending"},
+            {"lesson": "02", "anchor": "p06-m01-l02", "name": "Environment Profiles", "status": "pending"},
+            {"lesson": "03", "anchor": "p06-m01-l03", "name": "Dependencies & Health", "status": "pending"},
+            {"lesson": "04", "anchor": "p06-m01-l04", "name": "Secrets Management", "status": "pending"}
+          ]
+        }
+      ]
+    },
+    {
+      "phase": "07",
+      "name": "Security",
+      "status": "pending",
+      "modules": [
+        {
+          "module": "01",
+          "name": "Container Hardening",
+          "lessons": [
+            {"lesson": "01", "anchor": "p07-m01-l01", "name": "Non-root Users", "status": "pending"},
+            {"lesson": "02", "anchor": "p07-m01-l02", "name": "Capabilities", "status": "pending"},
+            {"lesson": "03", "anchor": "p07-m01-l03", "name": "Read-only Filesystems", "status": "pending"},
+            {"lesson": "04", "anchor": "p07-m01-l04", "name": "Image Scanning", "status": "pending"}
+          ]
+        }
+      ]
+    },
+    {
+      "phase": "08",
+      "name": "CI/CD & Buildx",
+      "status": "pending",
+      "modules": [
+        {
+          "module": "01",
+          "name": "Build Automation",
+          "lessons": [
+            {"lesson": "01", "anchor": "p08-m01-l01", "name": "Multi-arch Builds", "status": "pending"},
+            {"lesson": "02", "anchor": "p08-m01-l02", "name": "Cache Strategies", "status": "pending"},
+            {"lesson": "03", "anchor": "p08-m01-l03", "name": "Registry Publishing", "status": "pending"},
+            {"lesson": "04", "anchor": "p08-m01-l04", "name": "SBOM Generation", "status": "pending"}
+          ]
+        }
+      ]
+    },
+    {
+      "phase": "09",
+      "name": "Registries",
+      "status": "pending",
+      "modules": [
+        {
+          "module": "01",
+          "name": "Registry Operations",
+          "lessons": [
+            {"lesson": "01", "anchor": "p09-m01-l01", "name": "Local Registries", "status": "pending"},
+            {"lesson": "02", "anchor": "p09-m01-l02", "name": "Mirror Configuration", "status": "pending"},
+            {"lesson": "03", "anchor": "p09-m01-l03", "name": "Authentication", "status": "pending"},
+            {"lesson": "04", "anchor": "p09-m01-l04", "name": "Retention Policies", "status": "pending"}
+          ]
+        }
+      ]
+    },
+    {
+      "phase": "10",
+      "name": "Observability",
+      "status": "pending",
+      "modules": [
+        {
+          "module": "01",
+          "name": "Monitoring & Logging",
+          "lessons": [
+            {"lesson": "01", "anchor": "p10-m01-l01", "name": "Logging Drivers", "status": "pending"},
+            {"lesson": "02", "anchor": "p10-m01-l02", "name": "Metrics Collection", "status": "pending"},
+            {"lesson": "03", "anchor": "p10-m01-l03", "name": "Image Analysis", "status": "pending"},
+            {"lesson": "04", "anchor": "p10-m01-l04", "name": "Performance Budgets", "status": "pending"}
+          ]
+        }
+      ]
+    },
+    {
+      "phase": "11",
+      "name": "Advanced Images",
+      "status": "pending",
+      "modules": [
+        {
+          "module": "01",
+          "name": "Minimal Images",
+          "lessons": [
+            {"lesson": "01", "anchor": "p11-m01-l01", "name": "Distroless Strategy", "status": "pending"},
+            {"lesson": "02", "anchor": "p11-m01-l02", "name": "Static Linking", "status": "pending"},
+            {"lesson": "03", "anchor": "p11-m01-l03", "name": "Debug Variants", "status": "pending"},
+            {"lesson": "04", "anchor": "p11-m01-l04", "name": "CVE Minimization", "status": "pending"}
+          ]
+        }
+      ]
+    }
+  ],
+  "statistics": {
+    "total_lessons": 48,
+    "completed_lessons": 0,
+    "in_progress_lessons": 0,
+    "pending_lessons": 48,
+    "completion_percentage": 0
+  }
+}
