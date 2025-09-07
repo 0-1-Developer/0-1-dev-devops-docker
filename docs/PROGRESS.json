@@ -1,7 +1,7 @@
 {
   "metadata": {
     "version": "1.0.0",
-    "last_updated": "2025-01-07T00:00:00Z",
+    "last_updated": "2025-01-07T14:30:00Z",
     "total_phases": 12,
     "description": "Progress tracking for Docker learning path"
   },
@@ -9,16 +9,16 @@
     {
       "phase": "00",
       "name": "Foundations",
-      "status": "pending",
+      "status": "implemented",
       "modules": [
         {
           "module": "01",
           "name": "Core Concepts",
           "lessons": [
-            {"lesson": "01", "anchor": "p00-m01-l01", "name": "Image vs Container", "status": "pending"},
-            {"lesson": "02", "anchor": "p00-m01-l02", "name": "Container Lifecycle", "status": "pending"},
-            {"lesson": "03", "anchor": "p00-m01-l03", "name": "Resource Mapping", "status": "pending"},
-            {"lesson": "04", "anchor": "p00-m01-l04", "name": "Tags vs Digests", "status": "pending"}
+            {"lesson": "01", "anchor": "p00-m01-l01", "name": "Image Reference Anatomy", "status": "implemented"},
+            {"lesson": "02", "anchor": "p00-m01-l02", "name": "Lifecycle Ordering Game", "status": "implemented"},
+            {"lesson": "03", "anchor": "p00-m01-l03", "name": "Resource Mapping Sketch", "status": "implemented"},
+            {"lesson": "04", "anchor": "p00-m01-l04", "name": "Tags vs Digests Decision", "status": "implemented"}
           ]
         }
       ]
