@@ -1,0 +1,136 @@
+name: ❓ Question
+description: Ask questions about Docker concepts or learning path content
+title: "[Question]: "
+labels: ["question", "needs-response"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Have a question about Docker concepts or how to complete an exercise? We're here to help!
+        
+        **Before asking:** Please check the [FAQ](/docs/FAQ.md) and [Glossary](/docs/GLOSSARY.md) first.
+
+  - type: dropdown
+    id: question-type
+    attributes:
+      label: Type of Question
+      description: What kind of help do you need?
+      options:
+        - "Concept Clarification - Help understanding Docker concepts"
+        - "Exercise Help - Stuck on a specific exercise"
+        - "Best Practices - How to do something the right way"
+        - "Troubleshooting - Something isn't working as expected"
+        - "Platform Specific - Platform-specific behavior questions"
+        - "Career/Learning Path - Guidance on learning progression"
+        - "General Docker - Docker questions beyond this curriculum"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: phase
+    attributes:
+      label: Related Phase (if applicable)
+      description: Which phase is your question about?
+      options:
+        - "Not phase-specific"
+        - "Phase 00: Foundations"
+        - "Phase 01: Dockerfile Basics"
+        - "Phase 02: BuildKit Advanced"
+        - "Phase 03: Container Operations"
+        - "Phase 04: Networking"
+        - "Phase 05: Storage & Volumes"
+        - "Phase 06: Compose"
+        - "Phase 07: Security"
+        - "Phase 08: CI/CD & Buildx"
+        - "Phase 09: Registries"
+        - "Phase 10: Observability"
+        - "Phase 11: Advanced Images"
+
+  - type: input
+    id: progress-anchor
+    attributes:
+      label: Progress Anchor
+      description: "If stuck on a specific lesson, provide the anchor (e.g., p04-m01-l02)"
+      placeholder: "p04-m01-l02"
+
+  - type: textarea
+    id: question
+    attributes:
+      label: Your Question
+      description: "Ask your question clearly and provide context"
+      placeholder: |
+        **What you're trying to understand:**
+        Be specific about the Docker concept or exercise step.
+        
+        **What you've tried:**
+        What steps have you already taken?
+        
+        **Where you're stuck:**
+        What specific part is confusing or not working?
+    validations:
+      required: true
+
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platform
+      description: What platform are you using?
+      options:
+        - "Not platform-specific"
+        - "Linux (Docker Engine)"
+        - "macOS (Docker Desktop)"
+        - "Windows (Docker Desktop with WSL2)"
+        - "Windows (Docker Desktop with Hyper-V)"
+        - "Cloud Instance"
+
+  - type: textarea
+    id: what-you-tried
+    attributes:
+      label: What You've Tried
+      description: "Commands you've run, documentation you've checked, troubleshooting steps taken"
+      placeholder: |
+        Commands attempted:
+        ```bash
+        docker run ...
+        docker build ...
+        ```
+        
+        Resources checked:
+        - [ ] FAQ.md
+        - [ ] GLOSSARY.md
+        - [ ] Phase-specific troubleshooting
+        - [ ] Official Docker documentation
+        - [ ] Platform-specific notes
+
+  - type: textarea
+    id: error-output
+    attributes:
+      label: Error Messages (if any)
+      description: "If you're getting errors, paste them here"
+      render: text
+
+  - type: dropdown
+    id: experience-level
+    attributes:
+      label: Your Docker Experience
+      description: Help us tailor our response to your level
+      options:
+        - "Complete beginner - new to containers"
+        - "Some experience - used Docker basics before"
+        - "Intermediate - comfortable with most Docker features"
+        - "Advanced - experienced with Docker, learning edge cases"
+
+  - type: checkboxes
+    id: research-done
+    attributes:
+      label: Research Completed
+      description: "Confirm you've done initial research (helps us provide better answers)"
+      options:
+        - label: "I checked the FAQ for similar questions"
+          required: true
+        - label: "I looked up relevant terms in the Glossary"
+          required: true
+        - label: "I reviewed the phase-specific troubleshooting sections"
+          required: false
+        - label: "I searched existing issues for similar questions"
+          required: false

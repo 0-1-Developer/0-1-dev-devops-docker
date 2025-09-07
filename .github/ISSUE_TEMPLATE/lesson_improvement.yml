@@ -1,0 +1,127 @@
+name: 📚 Lesson Improvement
+description: Suggest improvements to existing learning content
+title: "[Improvement]: "
+labels: ["enhancement", "curriculum", "needs-review"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for suggesting improvements! Your feedback helps make the Docker learning path better.
+
+  - type: dropdown
+    id: phase
+    attributes:
+      label: Phase
+      description: Which phase needs improvement?
+      options:
+        - "Phase 00: Foundations"
+        - "Phase 01: Dockerfile Basics"
+        - "Phase 02: BuildKit Advanced"
+        - "Phase 03: Container Operations" 
+        - "Phase 04: Networking"
+        - "Phase 05: Storage & Volumes"
+        - "Phase 06: Compose"
+        - "Phase 07: Security"
+        - "Phase 08: CI/CD & Buildx"
+        - "Phase 09: Registries"
+        - "Phase 10: Observability"
+        - "Phase 11: Advanced Images"
+        - "General/Documentation"
+    validations:
+      required: true
+
+  - type: input
+    id: progress-anchor
+    attributes:
+      label: Progress Anchor
+      description: "Specific lesson anchor if applicable (e.g., p04-m01-l02)"
+      placeholder: "p04-m01-l02"
+
+  - type: dropdown
+    id: improvement-type
+    attributes:
+      label: Type of Improvement
+      description: What kind of improvement are you suggesting?
+      options:
+        - "Content Clarity - Make explanation clearer"
+        - "Missing Information - Add missing concepts"
+        - "Exercise Enhancement - Improve hands-on activities"
+        - "Visual Aid - Add diagrams or illustrations"
+        - "Platform Coverage - Better platform-specific guidance"
+        - "Real-world Examples - More practical examples"
+        - "Security Update - Security best practices"
+        - "Performance Tips - Optimization guidance"
+        - "Troubleshooting - Better error handling"
+        - "Other"
+    validations:
+      required: true
+
+  - type: textarea
+    id: current-state
+    attributes:
+      label: Current State
+      description: "Describe the current content and what's unclear or missing"
+      placeholder: |
+        **Current content issues:**
+        - What is currently confusing or incomplete?
+        - Which part of the lesson needs work?
+        - What questions remain unanswered?
+
+  - type: textarea
+    id: proposed-improvement
+    attributes:
+      label: Proposed Improvement
+      description: "Detailed suggestion for improvement"
+      placeholder: |
+        **Specific suggestions:**
+        - What should be added, changed, or clarified?
+        - How would this improve the learning experience?
+        - Any specific examples or techniques to include?
+        
+        **Learning benefit:**
+        - How does this help learners better understand Docker?
+        - What real-world skills does this address?
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority Level
+      description: How important is this improvement?
+      options:
+        - "High - Blocks learning or causes confusion"
+        - "Medium - Improves learning experience significantly"
+        - "Low - Nice to have enhancement"
+    validations:
+      required: true
+
+  - type: textarea
+    id: examples
+    attributes:
+      label: Examples or References
+      description: "Links to documentation, examples, or other resources that support your suggestion"
+      placeholder: |
+        - Official Docker documentation: https://docs.docker.com/...
+        - Best practices articles: https://...
+        - Similar examples from other sources: https://...
+
+  - type: checkboxes
+    id: learner-context
+    attributes:
+      label: Learner Context
+      description: "Help us understand your learning context"
+      options:
+        - label: "I'm currently working through this phase"
+        - label: "I completed this phase and noticed the gap"
+        - label: "I'm an instructor/mentor using this curriculum"
+        - label: "I have professional Docker experience"
+
+  - type: checkboxes
+    id: contribution
+    attributes:
+      label: Contribution Interest
+      options:
+        - label: "I'd be interested in helping implement this improvement"
+        - label: "I can provide additional examples or resources"
+        - label: "I can help review the changes"

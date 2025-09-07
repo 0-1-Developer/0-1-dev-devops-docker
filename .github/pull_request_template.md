@@ -1,70 +1,116 @@
-## Scope
-<!-- Which phase/modules/anchors does this PR cover? -->
-- Phase: 
-- Modules: 
-- Anchors: 
+# Pull Request
 
-## Learning Objectives
-<!-- What will learners be able to do after this phase? -->
-- [ ] 
-- [ ] 
-- [ ] 
+> **Note**: For phase implementations, use the [Phase PR template](PULL_REQUEST_TEMPLATE/phase_pr.md) instead.
 
-## Micro-lessons
-<!-- List micro-lessons with their anchors -->
-| Lesson | Anchor | Description |
-|--------|--------|-------------|
-|        |        |             |
+## 📋 PR Summary
 
-## Hands-on Labs
-<!-- List hands-on exercises with their anchors -->
-| Lab | Anchor | Description |
-|-----|--------|-------------|
-|     |        |             |
+### Type of Change
+- [ ] 🐛 Bug fix (non-breaking change that fixes an issue)
+- [ ] ✨ New feature or content (non-breaking change that adds functionality)
+- [ ] 💥 Breaking change (fix or feature that would cause existing functionality to not work as expected)
+- [ ] 📚 Documentation update (non-code changes to documentation)
+- [ ] 🔧 Maintenance (dependency updates, tooling, etc.)
 
-## Verify Rules
-<!-- What assertions will confirm successful completion? -->
-- [ ] 
-- [ ] 
-- [ ] 
+### Scope
+- [ ] **Phase-specific**: Affects specific phase(s): [List phases]
+- [ ] **Cross-phase**: Affects multiple phases or general infrastructure
+- [ ] **Meta**: Repository structure, CI/CD, or tooling changes
 
-## Windows/WSL2 Notes
-<!-- Any platform-specific considerations? -->
+## 🎯 Description
 
+### What does this PR do?
+[Clear description of what this PR accomplishes]
 
-## Visuals to Include
-<!-- What diagrams/images are planned? -->
-- [ ] 
-- [ ] 
+### Why is this change needed?
+[Explanation of the problem this PR solves or the value it adds]
 
-## Out-of-Scope / Deferred
-<!-- What is intentionally NOT included in this PR? -->
+### How was this implemented?
+[Brief overview of the approach taken]
 
+## 🧪 Testing
 
-## Quality Checklist
-- [ ] All 5 required files present (README.md, lab.md, verify.rules.md, cleanup.rules.md, visuals.md)
-- [ ] Minimum 3 micro-lessons with clear outcomes
-- [ ] At least 1 Production Note included
-- [ ] At least 1 Pitfalls section included
-- [ ] Windows/WSL2 callouts where relevant
-- [ ] Progress anchors updated in PROGRESS.json
-- [ ] Follows lesson template exactly
-- [ ] No code in planning documents
+### Testing Completed
+- [ ] All affected exercises tested and working
+- [ ] Cross-platform testing (specify platforms tested)
+- [ ] Verification scripts run successfully
+- [ ] Cleanup procedures tested
 
-## Authorship Confirmation
+### Test Environment
+- **Platform(s)**: [Linux/macOS/Windows/WSL2]
+- **Docker Version**: [Version used for testing]
+- **Additional Tools**: [Any special requirements]
+
+## 📝 Changes Made
+
+### Files Added/Modified
+- `path/to/file1.md` - [Brief description of changes]
+- `path/to/file2.md` - [Brief description of changes]
+
+### Progress Tracking Updates
+- [ ] `PROGRESS.json` updated if applicable
+- [ ] Progress anchors added/modified
+- [ ] Phase completion status updated
+
+## 🔗 Related Issues
+
+### Addresses Issues
+- Fixes #[issue number] - [Brief description]
+- Resolves #[issue number] - [Brief description]
+
+### Related Work
+- Related to #[issue number] - [How it relates]
+- Depends on #[PR number] - [What dependency]
+
+## ✅ Checklist
+
+### Content Quality
+- [ ] Content follows established patterns and style
+- [ ] All examples tested and working
+- [ ] Language is clear and accessible
+- [ ] Technical accuracy verified
+
+### Structure and Integration
+- [ ] Files follow naming conventions
+- [ ] Cross-references work correctly
+- [ ] Integration with existing content maintained
+- [ ] No broken links introduced
+
+### Platform Considerations
+- [ ] Cross-platform compatibility verified
+- [ ] Platform-specific notes added where needed
+- [ ] Windows/WSL2 considerations addressed
+- [ ] Performance implications considered
+
+### Documentation
+- [ ] Changes documented in relevant places
+- [ ] FAQ updated if new questions arise
+- [ ] Glossary updated if new terms introduced
+- [ ] Platform notes updated if needed
+
+## 🚫 Authorship Confirmation
+
+### REQUIRED Confirmations
 - [ ] **Confirmed: I am the sole author of this PR**
 - [ ] **No co-author trailers in commit messages**
-- [ ] **All code was written by me personally**
+- [ ] **All content created or modified by me personally**
+- [ ] **I have tested all changes personally**
 
-## Testing
-- [ ] Labs tested on Linux/macOS
-- [ ] Labs tested on Windows/WSL2
-- [ ] Cleanup procedures verified
-- [ ] Verify rules are automatable
+### Compliance
+- [ ] Follows `/CLAUDE.md` guidelines
+- [ ] Maintains repository standards
+- [ ] No unauthorized collaboration or co-authorship
 
-## Related Issues
-<!-- Link any related issues -->
-Closes #
+## 💬 Additional Notes
 
-## Additional Notes
-<!-- Any other relevant information -->
+### Special Considerations
+[Any special notes for reviewers or deployment considerations]
+
+### Future Work
+[Any follow-up work identified or planned improvements]
+
+### Breaking Changes
+[If applicable, describe any breaking changes and migration path]
+
+---
+
+*Thank you for contributing to the Docker learning path! Please ensure all checkboxes are completed before requesting review.*
