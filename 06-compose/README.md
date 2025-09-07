@@ -982,6 +982,13 @@ services:
       - app_data:/app/data
 ```
 
+## 📈 Progress Tracking
+
+This phase contains 4 micro-lessons with anchors:
+- `p06-m01-l01` - Service Modeling
+- `p06-m01-l02` - Environment Profiles
+- `p06-m01-l03` - Dependencies & Health
+- `p06-m01-l04` - Secrets Management
 ## 🏁 Success Criteria
 
 By the end of this phase, you should be able to:
