@@ -1,7 +1,7 @@
 {
   "metadata": {
     "version": "1.0.0",
-    "last_updated": "2025-01-07T22:45:00Z",
+    "last_updated": "2025-01-07T23:30:00Z",
     "total_phases": 12,
     "description": "Progress tracking for Docker learning path"
   },
@@ -94,16 +94,16 @@
     {
       "phase": "05",
       "name": "Storage & Volumes",
-      "status": "pending",
+      "status": "implemented",
       "modules": [
         {
           "module": "01",
           "name": "Data Management",
           "lessons": [
-            {"lesson": "01", "anchor": "p05-m01-l01", "name": "Volume Types", "status": "pending"},
-            {"lesson": "02", "anchor": "p05-m01-l02", "name": "Backup & Restore", "status": "pending"},
-            {"lesson": "03", "anchor": "p05-m01-l03", "name": "Permission Handling", "status": "pending"},
-            {"lesson": "04", "anchor": "p05-m01-l04", "name": "Performance Optimization", "status": "pending"}
+            {"lesson": "01", "anchor": "p05-m01-l01", "name": "Volume Types and Selection Guide", "status": "implemented"},
+            {"lesson": "02", "anchor": "p05-m01-l02", "name": "Backup and Restore Strategies", "status": "implemented"},
+            {"lesson": "03", "anchor": "p05-m01-l03", "name": "Permission Handling and Security", "status": "implemented"},
+            {"lesson": "04", "anchor": "p05-m01-l04", "name": "Performance Optimization Techniques", "status": "implemented"}
           ]
         }
       ]
@@ -213,9 +213,9 @@
   ],
   "statistics": {
     "total_lessons": 48,
-    "completed_lessons": 20,
+    "completed_lessons": 24,
     "in_progress_lessons": 0,
-    "pending_lessons": 28,
-    "completion_percentage": 42
+    "pending_lessons": 24,
+    "completion_percentage": 50
   }
 }
