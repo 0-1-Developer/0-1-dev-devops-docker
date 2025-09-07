@@ -1,7 +1,7 @@
 {
   "metadata": {
     "version": "1.0.0",
-    "last_updated": "2025-01-07T15:45:00Z",
+    "last_updated": "2025-01-07T18:30:00Z",
     "total_phases": 12,
     "description": "Progress tracking for Docker learning path"
   },
@@ -43,16 +43,16 @@
     {
       "phase": "02",
       "name": "BuildKit Advanced",
-      "status": "pending",
+      "status": "implemented",
       "modules": [
         {
           "module": "01",
           "name": "Multi-stage Builds",
           "lessons": [
-            {"lesson": "01", "anchor": "p02-m01-l01", "name": "Stage Design", "status": "pending"},
-            {"lesson": "02", "anchor": "p02-m01-l02", "name": "Secret Management", "status": "pending"},
-            {"lesson": "03", "anchor": "p02-m01-l03", "name": "Cache Mounts", "status": "pending"},
-            {"lesson": "04", "anchor": "p02-m01-l04", "name": "Build Args", "status": "pending"}
+            {"lesson": "01", "anchor": "p02-m01-l01", "name": "Runtime vs Builder Contents", "status": "implemented"},
+            {"lesson": "02", "anchor": "p02-m01-l02", "name": "Secret Lifecycle Mapping", "status": "implemented"},
+            {"lesson": "03", "anchor": "p02-m01-l03", "name": "Cache Strategies for Speed", "status": "implemented"},
+            {"lesson": "04", "anchor": "p02-m01-l04", "name": "Build Args and Target Naming", "status": "implemented"}
           ]
         }
       ]
@@ -213,9 +213,9 @@
   ],
   "statistics": {
     "total_lessons": 48,
-    "completed_lessons": 0,
+    "completed_lessons": 12,
     "in_progress_lessons": 0,
-    "pending_lessons": 48,
-    "completion_percentage": 0
+    "pending_lessons": 36,
+    "completion_percentage": 25
   }
 }
